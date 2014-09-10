@@ -65,7 +65,7 @@ interfaces as well as helper functions such as `UnmarshalFeatureCollection`, `Un
 	Thus there is a separate attribute on Geometry for each type. 
 	See the [Geometry object](https://godoc.org/github.com/paulmach/go.geojson#Geometry) for more details.
 
-		g := UnmarshalGeometry([]byte(`
+		g := geojson.UnmarshalGeometry([]byte(`
 			{
 	          "type": "LineString",
 	          "coordinates": [
@@ -82,9 +82,9 @@ interfaces as well as helper functions such as `UnmarshalFeatureCollection`, `Un
 
 ## Feature Properties
 
-GeoJSON [Features](http://geojson.org/geojson-spec.html#feature-objects) can have properties of any type
-causing issues in a statically typed language such as Go.
-So, included are some helper methods on the Feature object to make the ease the pain.
+GeoJSON [Features](http://geojson.org/geojson-spec.html#feature-objects) can have properties of any type.
+This can cause issues in a statically typed language such as Go.
+So, included are some helper methods on the Feature object to ease the pain.
 
 	// functions to do the casting for you
 	func (f Feature) PropertyBool(key string) (bool, error) {
