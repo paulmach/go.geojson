@@ -133,6 +133,19 @@ func TestFeaturePropertyMustInt(t *testing.T) {
 	if i != 1 {
 		t.Errorf("should return proper property, without default")
 	}
+
+	f.SetProperty("true_int", 5)
+	i = f.PropertyMustInt("true_int")
+	if i != 5 {
+		// json decode makes all things float64,
+		// but manually setting will be a true int
+		t.Errorf("should work for true integer types")
+	}
+
+	i = f.PropertyMustInt("float64")
+	if i != 1 {
+		t.Errorf("should convert float64 to int")
+	}
 }
 
 func TestFeaturePropertyMustFloat64(t *testing.T) {

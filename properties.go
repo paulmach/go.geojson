@@ -23,9 +23,14 @@ func (f Feature) PropertyBool(key string) (bool, error) {
 
 // PropertyInt type asserts a property to `int`.
 func (f Feature) PropertyInt(key string) (int, error) {
+	if i, ok := (f.Properties[key]).(int); ok {
+		return i, nil
+	}
+
 	if i, ok := (f.Properties[key]).(float64); ok {
 		return int(i), nil
 	}
+
 	return 0, fmt.Errorf("type assertion of `%s` to int failed", key)
 }
 
