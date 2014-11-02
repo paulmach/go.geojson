@@ -288,36 +288,36 @@ func decodeGeometries(data interface{}) ([]*Geometry, error) {
 }
 
 // IsPoint returns true with the geometry object is a Point type.
-func (g Geometry) IsPoint() bool {
+func (g *Geometry) IsPoint() bool {
 	return g.Type == GeometryPoint
 }
 
 // IsMultiPoint returns true with the geometry object is a MultiPoint type.
-func (g Geometry) IsMultiPoint() bool {
+func (g *Geometry) IsMultiPoint() bool {
 	return g.Type == GeometryMultiPoint
 }
 
 // IsLineString returns true with the geometry object is a LineString type.
-func (g Geometry) IsLineString() bool {
+func (g *Geometry) IsLineString() bool {
 	return g.Type == GeometryLineString
 }
 
 // IsMultiLineString returns true with the geometry object is a LineString type.
-func (g Geometry) IsMultiLineString() bool {
+func (g *Geometry) IsMultiLineString() bool {
 	return g.Type == GeometryMultiLineString
 }
 
 // IsPolygon returns true with the geometry object is a Polygon type.
-func (g Geometry) IsPolygon() bool {
+func (g *Geometry) IsPolygon() bool {
 	return g.Type == GeometryPolygon
 }
 
 // IsMultiPolygon returns true with the geometry object is a MultiPolygon type.
-func (g Geometry) IsMultiPolygon() bool {
+func (g *Geometry) IsMultiPolygon() bool {
 	return g.Type == GeometryMultiPolygon
 }
 
 // IsCollection returns true with the geometry object is a GeometryCollection type.
-func (g Geometry) IsCollection() bool {
+func (g *Geometry) IsCollection() bool {
 	return g.Type == GeometryCollection
 }

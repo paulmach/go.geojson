@@ -14,7 +14,7 @@ func (f *Feature) SetProperty(key string, value interface{}) {
 }
 
 // PropertyBool type asserts a property to `bool`.
-func (f Feature) PropertyBool(key string) (bool, error) {
+func (f *Feature) PropertyBool(key string) (bool, error) {
 	if b, ok := (f.Properties[key]).(bool); ok {
 		return b, nil
 	}
@@ -22,7 +22,7 @@ func (f Feature) PropertyBool(key string) (bool, error) {
 }
 
 // PropertyInt type asserts a property to `int`.
-func (f Feature) PropertyInt(key string) (int, error) {
+func (f *Feature) PropertyInt(key string) (int, error) {
 	if i, ok := (f.Properties[key]).(int); ok {
 		return i, nil
 	}
@@ -35,7 +35,7 @@ func (f Feature) PropertyInt(key string) (int, error) {
 }
 
 // PropertyFloat64 type asserts a property to `float64`.
-func (f Feature) PropertyFloat64(key string) (float64, error) {
+func (f *Feature) PropertyFloat64(key string) (float64, error) {
 	if i, ok := (f.Properties[key]).(float64); ok {
 		return i, nil
 	}
@@ -43,7 +43,7 @@ func (f Feature) PropertyFloat64(key string) (float64, error) {
 }
 
 // PropertyString type asserts a property to `string`.
-func (f Feature) PropertyString(key string) (string, error) {
+func (f *Feature) PropertyString(key string) (string, error) {
 	if s, ok := (f.Properties[key]).(string); ok {
 		return s, nil
 	}
@@ -54,7 +54,7 @@ func (f Feature) PropertyString(key string) (string, error) {
 //
 // useful when you explicitly want a `bool` in a single value return context:
 //     myFunc(f.PropertyMustBool("param1"), f.PropertyMustBool("optional_param", true))
-func (f Feature) PropertyMustBool(key string, def ...bool) bool {
+func (f *Feature) PropertyMustBool(key string, def ...bool) bool {
 	var defaul bool
 
 	b, err := f.PropertyBool(key)
@@ -73,7 +73,7 @@ func (f Feature) PropertyMustBool(key string, def ...bool) bool {
 //
 // useful when you explicitly want a `bool` in a single value return context:
 //     myFunc(f.PropertyMustInt("param1"), f.PropertyMustInt("optional_param", 123))
-func (f Feature) PropertyMustInt(key string, def ...int) int {
+func (f *Feature) PropertyMustInt(key string, def ...int) int {
 	var defaul int
 
 	b, err := f.PropertyInt(key)
@@ -92,7 +92,7 @@ func (f Feature) PropertyMustInt(key string, def ...int) int {
 //
 // useful when you explicitly want a `bool` in a single value return context:
 //     myFunc(f.PropertyMustFloat64("param1"), f.PropertyMustFloat64("optional_param", 10.1))
-func (f Feature) PropertyMustFloat64(key string, def ...float64) float64 {
+func (f *Feature) PropertyMustFloat64(key string, def ...float64) float64 {
 	var defaul float64
 
 	b, err := f.PropertyFloat64(key)
@@ -111,7 +111,7 @@ func (f Feature) PropertyMustFloat64(key string, def ...float64) float64 {
 //
 // useful when you explicitly want a `bool` in a single value return context:
 //     myFunc(f.PropertyMustString("param1"), f.PropertyMustString("optional_param", "default"))
-func (f Feature) PropertyMustString(key string, def ...string) string {
+func (f *Feature) PropertyMustString(key string, def ...string) string {
 	var defaul string
 
 	b, err := f.PropertyString(key)
