@@ -262,3 +262,25 @@ func TestUnmarshalGeometryCollection(t *testing.T) {
 		t.Errorf("should have 2 geometries but got %d", len(g.Geometries))
 	}
 }
+
+func TestGeometryScan(t *testing.T) {
+	g := &Geometry{}
+
+	err := g.Scan(123)
+	if err == nil {
+		t.Errorf("should return error if not the correct data type")
+	}
+
+	err = g.Scan([]byte(`{"type":"Point","coordinates":[-93.787988,32.392335]}`))
+	if err != nil {
+		t.Fatalf("should parse without error, got %v", err)
+	}
+
+	if !g.IsPoint() {
+		t.Errorf("should be point, but got %v", g)
+	}
+
+	if g.Point[0] != -93.787988 || g.Point[1] != 32.392335 {
+		t.Errorf("incorrect point data, got %v", g.Point)
+	}
+}

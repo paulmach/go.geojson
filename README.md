@@ -1,9 +1,10 @@
 go.geojson
 ==========
 
-go.geojson is a library for **encoding and decoding** [GeoJSON](http://geojson.org/) into Go structs.
+Go.geojson is a package for **encoding and decoding** [GeoJSON](http://geojson.org/) into Go structs.
 Supports both the [json.Marshaler](http://golang.org/pkg/encoding/json/#Marshaler) and [json.Unmarshaler](http://golang.org/pkg/encoding/json/#Unmarshaler)
-interfaces as well as helper functions such as `UnmarshalFeatureCollection`, `UnmarshalFeature` and `UnmarshalGeometry`.
+interfaces as well as [sql.Scanner](http://golang.org/pkg/database/sql/#Scanner) for directly scanner PostGIS query results.
+The package also provides helper functions such as `UnmarshalFeatureCollection`, `UnmarshalFeature` and `UnmarshalGeometry`.
 
 #### To install
 	
@@ -48,8 +49,7 @@ interfaces as well as helper functions such as `UnmarshalFeatureCollection`, `Un
 
 		g.IsPoint() == true
 		g.Point == []float64{102.0, 0.5}
-
-
+	
 * #### Marshalling (Go -> JSON)
 
 		g := geojson.NewPointGeometry([]float64{1, 2})
@@ -58,6 +58,13 @@ interfaces as well as helper functions such as `UnmarshalFeatureCollection`, `Un
 		fc := geojson.NewFeatureCollection()
 		fc.AddFeature(geojson.NewPointFeature([]float64{1,2}))
 		rawJSON, err := fc.MarshalJSON()
+
+* #### Scanning PostGIS query results
+
+		row := db.QueryRow("SELECT ST_AsGeoJSON(the_geom) FROM postgis_table)
+
+		var geometry *geojson.Geometry
+		row.Scan(&geometry)
 
 * #### Dealing with different Geometry types
 

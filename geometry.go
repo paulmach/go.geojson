@@ -154,6 +154,19 @@ func (g *Geometry) UnmarshalJSON(data []byte) error {
 	return decodeGeometry(g, object)
 }
 
+// Scan implements the sql.Scanner interface allowing
+// geometry structs to be passed into rows.Scan(...interface{})
+// The columns must be received as GeoJSON Geometry.
+// When using PostGIS a spatial column would need to be wrapped in ST_AsGeoJSON.
+func (g *Geometry) Scan(value interface{}) error {
+	data, ok := value.([]byte)
+	if !ok {
+		return errors.New("unable to parse this type into geojson")
+	}
+
+	return g.UnmarshalJSON(data)
+}
+
 func decodeGeometry(g *Geometry, object map[string]interface{}) error {
 	t, ok := object["type"]
 	if !ok {
