@@ -40,7 +40,7 @@ func TestGeometryMarshalJSONMultiPoint(t *testing.T) {
 }
 
 func TestGeometryMarshalJSONLineString(t *testing.T) {
-	g := NewLineStringGeometry([][]float64{[]float64{1, 2}, []float64{3, 4}})
+	g := NewLineStringGeometry([][]float64{{1, 2}, {3, 4}})
 	blob, err := g.MarshalJSON()
 
 	if err != nil {
@@ -58,8 +58,8 @@ func TestGeometryMarshalJSONLineString(t *testing.T) {
 
 func TestGeometryMarshalJSONMultiLineString(t *testing.T) {
 	g := NewMultiLineStringGeometry(
-		[][]float64{[]float64{1, 2}, []float64{3, 4}},
-		[][]float64{[]float64{5, 6}, []float64{7, 8}},
+		[][]float64{{1, 2}, {3, 4}},
+		[][]float64{{5, 6}, {7, 8}},
 	)
 	blob, err := g.MarshalJSON()
 
@@ -78,8 +78,8 @@ func TestGeometryMarshalJSONMultiLineString(t *testing.T) {
 
 func TestGeometryMarshalJSONPolygon(t *testing.T) {
 	g := NewPolygonGeometry([][][]float64{
-		[][]float64{[]float64{1, 2}, []float64{3, 4}},
-		[][]float64{[]float64{5, 6}, []float64{7, 8}},
+		{{1, 2}, {3, 4}},
+		{{5, 6}, {7, 8}},
 	})
 	blob, err := g.MarshalJSON()
 
@@ -99,12 +99,12 @@ func TestGeometryMarshalJSONPolygon(t *testing.T) {
 func TestGeometryMarshalJSONMultiPolygon(t *testing.T) {
 	g := NewMultiPolygonGeometry(
 		[][][]float64{
-			[][]float64{[]float64{1, 2}, []float64{3, 4}},
-			[][]float64{[]float64{5, 6}, []float64{7, 8}},
+			{{1, 2}, {3, 4}},
+			{{5, 6}, {7, 8}},
 		},
 		[][][]float64{
-			[][]float64{[]float64{8, 7}, []float64{6, 5}},
-			[][]float64{[]float64{4, 3}, []float64{2, 1}},
+			{{8, 7}, {6, 5}},
+			{{4, 3}, {2, 1}},
 		})
 	blob, err := g.MarshalJSON()
 
