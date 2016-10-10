@@ -263,24 +263,47 @@ func TestUnmarshalGeometryCollection(t *testing.T) {
 	}
 }
 
-func TestGeometryScan(t *testing.T) {
+func TestGeometryScanFail(t *testing.T) {
 	g := &Geometry{}
 
 	err := g.Scan(123)
 	if err == nil {
 		t.Errorf("should return error if not the correct data type")
 	}
+}
 
-	err = g.Scan([]byte(`{"type":"Point","coordinates":[-93.787988,32.392335]}`))
-	if err != nil {
-		t.Fatalf("should parse without error, got %v", err)
+func TestGeometryScan(t *testing.T) {
+	cases := []struct {
+		name  string
+		value interface{}
+	}{
+		{
+			name:  "Scan from bytes",
+			value: []byte(`{"type":"Point","coordinates":[-93.787988,32.392335]}`),
+		},
+		{
+			name:  "Scan from string",
+			value: `{"type":"Point","coordinates":[-93.787988,32.392335]}`,
+		},
 	}
 
-	if !g.IsPoint() {
-		t.Errorf("should be point, but got %v", g)
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			g := &Geometry{}
+
+			err := g.Scan(tc.value)
+			if err != nil {
+				t.Fatalf("should parse without error, got %v", err)
+			}
+
+			if !g.IsPoint() {
+				t.Errorf("should be point, but got %v", g)
+			}
+
+			if g.Point[0] != -93.787988 || g.Point[1] != 32.392335 {
+				t.Errorf("incorrect point data, got %v", g.Point)
+			}
+		})
 	}
 
-	if g.Point[0] != -93.787988 || g.Point[1] != 32.392335 {
-		t.Errorf("incorrect point data, got %v", g.Point)
-	}
 }

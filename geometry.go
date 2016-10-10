@@ -159,8 +159,14 @@ func (g *Geometry) UnmarshalJSON(data []byte) error {
 // The columns must be received as GeoJSON Geometry.
 // When using PostGIS a spatial column would need to be wrapped in ST_AsGeoJSON.
 func (g *Geometry) Scan(value interface{}) error {
-	data, ok := value.([]byte)
-	if !ok {
+	var data []byte
+
+	switch value.(type) {
+	case string:
+		data = []byte(value.(string))
+	case []byte:
+		data = value.([]byte)
+	default:
 		return errors.New("unable to parse this type into geojson")
 	}
 
