@@ -46,3 +46,35 @@ func TestUnmarshalFeature(t *testing.T) {
 		t.Errorf("should have 1 property but got %d", len(f.Properties))
 	}
 }
+
+func TestUnmarshalFeatureID(t *testing.T) {
+	rawJSON := `
+	  { "type": "Feature",
+	    "id": 123,
+	    "geometry": {"type": "Point", "coordinates": [102.0, 0.5]}
+	  }`
+
+	f, err := UnmarshalFeature([]byte(rawJSON))
+	if err != nil {
+		t.Fatalf("should unmarshal feature without issue, err %v", err)
+	}
+
+	if v, err := f.ID.Int64(); v != 123 {
+		t.Errorf("should parse id as number, got %d %v", v, err)
+	}
+
+	rawJSON = `
+	  { "type": "Feature",
+	    "id": "abcd",
+	    "geometry": {"type": "Point", "coordinates": [102.0, 0.5]}
+	  }`
+
+	f, err = UnmarshalFeature([]byte(rawJSON))
+	if err != nil {
+		t.Fatalf("should unmarshal feature without issue, err %v", err)
+	}
+
+	if v := f.ID.String(); v != "abcd" {
+		t.Errorf("should parse id as string, got %s", v)
+	}
+}
