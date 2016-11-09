@@ -47,6 +47,34 @@ func TestUnmarshalFeature(t *testing.T) {
 	}
 }
 
+func TestMarshalFeatureID(t *testing.T) {
+	f := &Feature{
+		ID: "asdf",
+	}
+
+	data, err := f.MarshalJSON()
+	if err != nil {
+		t.Fatalf("should marshal, %v", err)
+	}
+
+	if !bytes.Equal(data, []byte(`{"id":"asdf","type":"Feature","geometry":null,"properties":null}`)) {
+		t.Errorf("data not correct")
+		t.Logf("%v", string(data))
+	}
+
+	f.ID = 123
+	data, err = f.MarshalJSON()
+	if err != nil {
+		t.Fatalf("should marshal, %v", err)
+
+	}
+
+	if !bytes.Equal(data, []byte(`{"id":123,"type":"Feature","geometry":null,"properties":null}`)) {
+		t.Errorf("data not correct")
+		t.Logf("%v", string(data))
+	}
+}
+
 func TestUnmarshalFeatureID(t *testing.T) {
 	rawJSON := `
 	  { "type": "Feature",
@@ -59,8 +87,8 @@ func TestUnmarshalFeatureID(t *testing.T) {
 		t.Fatalf("should unmarshal feature without issue, err %v", err)
 	}
 
-	if v, err := f.ID.Int64(); v != 123 {
-		t.Errorf("should parse id as number, got %d %v", v, err)
+	if v, ok := f.ID.(float64); !ok || v != 123 {
+		t.Errorf("should parse id as number, got %T %f", f.ID, v)
 	}
 
 	rawJSON = `
@@ -74,7 +102,7 @@ func TestUnmarshalFeatureID(t *testing.T) {
 		t.Fatalf("should unmarshal feature without issue, err %v", err)
 	}
 
-	if v := f.ID.String(); v != "abcd" {
-		t.Errorf("should parse id as string, got %s", v)
+	if v, ok := f.ID.(string); !ok || v != "abcd" {
+		t.Errorf("should parse id as string, got %T %s", f.ID, v)
 	}
 }
