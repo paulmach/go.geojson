@@ -39,7 +39,7 @@ func ExampleUnmarshalGeometry() {
 	// Output: Point
 }
 
-func ExampleMarshalJSON() {
+func ExampleFeatureCollection_MarshalJSON() {
 	fc := geojson.NewFeatureCollection()
 	fc.AddFeature(geojson.NewPointFeature([]float64{1, 2}))
 	rawJSON, err := fc.MarshalJSON()
