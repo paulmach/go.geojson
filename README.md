@@ -3,7 +3,7 @@ go.geojson
 
 Go.geojson is a package for **encoding and decoding** [GeoJSON](http://geojson.org/) into Go structs.
 Supports both the [json.Marshaler](http://golang.org/pkg/encoding/json/#Marshaler) and [json.Unmarshaler](http://golang.org/pkg/encoding/json/#Unmarshaler)
-interfaces as well as [sql.Scanner](http://golang.org/pkg/database/sql/#Scanner) for directly scanner PostGIS query results.
+interfaces as well as [sql.Scanner](http://golang.org/pkg/database/sql/#Scanner) for directly scanning PostGIS query results.
 The package also provides helper functions such as `UnmarshalFeatureCollection`, `UnmarshalFeature` and `UnmarshalGeometry`.
 
 #### To install
