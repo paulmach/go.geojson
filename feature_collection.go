@@ -35,12 +35,7 @@ func (fc *FeatureCollection) AddFeature(feature *Feature) *FeatureCollection {
 // It will handle the encoding of all the child features and geometries.
 // Alternately one can call json.Marshal(fc) directly for the same result.
 func (fc FeatureCollection) MarshalJSON() ([]byte, error) {
-	type featureCollection struct {
-		Type        string                 `json:"type"`
-		BoundingBox []float64              `json:"bbox,omitempty"`
-		Features    []*Feature             `json:"features"`
-		CRS         map[string]interface{} `json:"crs,omitempty"`
-	}
+	type featureCollection FeatureCollection
 
 	fcol := &featureCollection{
 		Type: "FeatureCollection",

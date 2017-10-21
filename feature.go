@@ -62,14 +62,7 @@ func NewCollectionFeature(geometries ...*Geometry) *Feature {
 // It will handle the encoding of all the child geometries.
 // Alternately one can call json.Marshal(f) directly for the same result.
 func (f Feature) MarshalJSON() ([]byte, error) {
-	type feature struct {
-		ID          interface{}            `json:"id,omitempty"`
-		Type        string                 `json:"type"`
-		BoundingBox []float64              `json:"bbox,omitempty"`
-		Geometry    *Geometry              `json:"geometry"`
-		Properties  map[string]interface{} `json:"properties"`
-		CRS         map[string]interface{} `json:"crs,omitempty"`
-	}
+	type feature Feature
 
 	fea := &feature{
 		ID:       f.ID,
