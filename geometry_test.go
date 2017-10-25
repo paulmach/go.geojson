@@ -2,6 +2,7 @@ package geojson
 
 import (
 	"bytes"
+	"encoding/json"
 	"testing"
 )
 
@@ -17,7 +18,41 @@ func TestGeometryMarshalJSONPoint(t *testing.T) {
 		t.Errorf("json should have type Point")
 	}
 
-	if !bytes.Contains(blob, []byte(`[1,2]`)) {
+	if !bytes.Contains(blob, []byte(`"coordinates":[1,2]`)) {
+		t.Errorf("json should marshal coordinates correctly")
+	}
+}
+
+func TestGeometryMarshalPoint(t *testing.T) {
+	g := NewPointGeometry([]float64{1, 2})
+	blob, err := json.Marshal(g)
+
+	if err != nil {
+		t.Fatalf("should json.Marshal just fine but got %v", err)
+	}
+
+	if !bytes.Contains(blob, []byte(`"type":"Point"`)) {
+		t.Errorf("json should have type Point")
+	}
+
+	if !bytes.Contains(blob, []byte(`"coordinates":[1,2]`)) {
+		t.Errorf("json should marshal coordinates correctly")
+	}
+}
+
+func TestGeometryMarshalPointValue(t *testing.T) {
+	g := NewPointGeometry([]float64{1, 2})
+	blob, err := json.Marshal(*g)
+
+	if err != nil {
+		t.Fatalf("should json.Marshal just fine but got %v", err)
+	}
+
+	if !bytes.Contains(blob, []byte(`"type":"Point"`)) {
+		t.Errorf("json should have type Point")
+	}
+
+	if !bytes.Contains(blob, []byte(`"coordinates":[1,2]`)) {
 		t.Errorf("json should marshal coordinates correctly")
 	}
 }
@@ -34,7 +69,7 @@ func TestGeometryMarshalJSONMultiPoint(t *testing.T) {
 		t.Errorf("json should have type MultiPoint")
 	}
 
-	if !bytes.Contains(blob, []byte(`[[1,2],[3,4]]`)) {
+	if !bytes.Contains(blob, []byte(`"coordinates":[[1,2],[3,4]]`)) {
 		t.Errorf("json should marshal coordinates correctly")
 	}
 }
@@ -51,7 +86,7 @@ func TestGeometryMarshalJSONLineString(t *testing.T) {
 		t.Errorf("json should have type LineString")
 	}
 
-	if !bytes.Contains(blob, []byte(`[[1,2],[3,4]]`)) {
+	if !bytes.Contains(blob, []byte(`"coordinates":[[1,2],[3,4]]`)) {
 		t.Errorf("json should marshal coordinates correctly")
 	}
 }
@@ -71,7 +106,7 @@ func TestGeometryMarshalJSONMultiLineString(t *testing.T) {
 		t.Errorf("json should have type MultiLineString")
 	}
 
-	if !bytes.Contains(blob, []byte(`[[[1,2],[3,4]],[[5,6],[7,8]]]`)) {
+	if !bytes.Contains(blob, []byte(`"coordinates":[[[1,2],[3,4]],[[5,6],[7,8]]]`)) {
 		t.Errorf("json should marshal coordinates correctly")
 	}
 }
@@ -91,7 +126,7 @@ func TestGeometryMarshalJSONPolygon(t *testing.T) {
 		t.Errorf("json should have type Polygon")
 	}
 
-	if !bytes.Contains(blob, []byte(`[[[1,2],[3,4]],[[5,6],[7,8]]]`)) {
+	if !bytes.Contains(blob, []byte(`"coordinates":[[[1,2],[3,4]],[[5,6],[7,8]]]`)) {
 		t.Errorf("json should marshal coordinates correctly")
 	}
 }
@@ -116,7 +151,7 @@ func TestGeometryMarshalJSONMultiPolygon(t *testing.T) {
 		t.Errorf("json should have type MultiPolygon")
 	}
 
-	if !bytes.Contains(blob, []byte(`[[[[1,2],[3,4]],[[5,6],[7,8]]],[[[8,7],[6,5]],[[4,3],[2,1]]]]`)) {
+	if !bytes.Contains(blob, []byte(`"coordinates":[[[[1,2],[3,4]],[[5,6],[7,8]]],[[[8,7],[6,5]],[[4,3],[2,1]]]]`)) {
 		t.Errorf("json should marshal coordinates correctly")
 	}
 }

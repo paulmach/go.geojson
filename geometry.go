@@ -92,7 +92,7 @@ func NewCollectionGeometry(geometries ...*Geometry) *Geometry {
 
 // MarshalJSON converts the geometry object into the correct JSON.
 // This fulfills the json.Marshaler interface.
-func (g *Geometry) MarshalJSON() ([]byte, error) {
+func (g Geometry) MarshalJSON() ([]byte, error) {
 	// defining a struct here lets us define the order of the JSON elements.
 	type geometry struct {
 		Type        GeometryType           `json:"type"`

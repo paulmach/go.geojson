@@ -61,13 +61,26 @@ func NewCollectionFeature(geometries ...*Geometry) *Feature {
 // MarshalJSON converts the feature object into the proper JSON.
 // It will handle the encoding of all the child geometries.
 // Alternately one can call json.Marshal(f) directly for the same result.
-func (f *Feature) MarshalJSON() ([]byte, error) {
-	f.Type = "Feature"
-	if len(f.Properties) == 0 {
-		f.Properties = nil
+func (f Feature) MarshalJSON() ([]byte, error) {
+	type feature Feature
+
+	fea := &feature{
+		ID:       f.ID,
+		Type:     "Feature",
+		Geometry: f.Geometry,
 	}
 
-	return json.Marshal(*f)
+	if f.BoundingBox != nil && len(f.BoundingBox) != 0 {
+		fea.BoundingBox = f.BoundingBox
+	}
+	if f.Properties != nil && len(f.Properties) != 0 {
+		fea.Properties = f.Properties
+	}
+	if f.CRS != nil && len(f.CRS) != 0 {
+		fea.CRS = f.CRS
+	}
+
+	return json.Marshal(fea)
 }
 
 // UnmarshalFeature decodes the data into a GeoJSON feature.
