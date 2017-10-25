@@ -14,11 +14,7 @@ The package also provides helper functions such as `UnmarshalFeatureCollection`,
 
 	import "github.com/paulmach/go.geojson"
 
-<br />
-[![Build Status](https://travis-ci.org/paulmach/go.geojson.png?branch=master)](https://travis-ci.org/paulmach/go.geojson)
-&nbsp; &nbsp;
-[![Coverage Status](https://coveralls.io/repos/paulmach/go.geojson/badge.png?branch=master)](https://coveralls.io/r/paulmach/go.geojson?branch=master)
-&nbsp; &nbsp;
+[![Build Status](https://travis-ci.org/paulmach/go.geojson.svg?branch=master)](https://travis-ci.org/paulmach/go.geojson)
 [![Godoc Reference](https://godoc.org/github.com/paulmach/go.geojson?status.png)](https://godoc.org/github.com/paulmach/go.geojson)
 
 ## Examples
