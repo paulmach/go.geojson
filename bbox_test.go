@@ -1,7 +1,6 @@
-package geojson	
+package geojson
 
 import "testing"
-
 
 func TestBoundingBoxPoint(t *testing.T) {
 	g := NewPointGeometry([]float64{1, 2})
@@ -9,7 +8,7 @@ func TestBoundingBoxPoint(t *testing.T) {
 	value := g.Get_BoundingBox()
 
 	if (expected[0] == value[0] && expected[1] == value[1] && expected[2] == value[2] && expected[3] == value[3]) == false {
-		t.Errorf("BoundingBox Point expected: %v, got: %v",expected,value)
+		t.Errorf("BoundingBox Point expected: %v, got: %v", expected, value)
 	}
 }
 
@@ -17,12 +16,11 @@ func TestBoundingBoxMultiPoint(t *testing.T) {
 	g := NewMultiPointGeometry([]float64{1, 2}, []float64{3, 4})
 	expected := []float64{1, 2, 3, 4}
 	value := g.Get_BoundingBox()
-	
+
 	if (expected[0] == value[0] && expected[1] == value[1] && expected[2] == value[2] && expected[3] == value[3]) == false {
-		t.Errorf("BoundingBox MultiPoint expected: %v, got: %v",expected,value)
+		t.Errorf("BoundingBox MultiPoint expected: %v, got: %v", expected, value)
 	}
 }
-
 
 func TestBoundingBoxLineString(t *testing.T) {
 	g := NewLineStringGeometry([][]float64{{1, 2}, {3, 4}})
@@ -30,10 +28,9 @@ func TestBoundingBoxLineString(t *testing.T) {
 	value := g.Get_BoundingBox()
 
 	if (expected[0] == value[0] && expected[1] == value[1] && expected[2] == value[2] && expected[3] == value[3]) == false {
-		t.Errorf("BoundingBox LineString expected: %v, got: %v",expected,value)
+		t.Errorf("BoundingBox LineString expected: %v, got: %v", expected, value)
 	}
 }
-
 
 func TestBoundingBoxMultiLineString(t *testing.T) {
 	g := NewMultiLineStringGeometry(
@@ -44,10 +41,9 @@ func TestBoundingBoxMultiLineString(t *testing.T) {
 	value := g.Get_BoundingBox()
 
 	if (expected[0] == value[0] && expected[1] == value[1] && expected[2] == value[2] && expected[3] == value[3]) == false {
-		t.Errorf("BoundingBox MultiLineString expected: %v, got: %v",expected,value)
+		t.Errorf("BoundingBox MultiLineString expected: %v, got: %v", expected, value)
 	}
 }
-
 
 func TestBoundingBoxPolygon(t *testing.T) {
 	g := NewPolygonGeometry([][][]float64{
@@ -58,7 +54,7 @@ func TestBoundingBoxPolygon(t *testing.T) {
 	value := g.Get_BoundingBox()
 
 	if (expected[0] == value[0] && expected[1] == value[1] && expected[2] == value[2] && expected[3] == value[3]) == false {
-		t.Errorf("BoundingBox Polygon expected: %v, got: %v",expected,value)
+		t.Errorf("BoundingBox Polygon expected: %v, got: %v", expected, value)
 	}
 }
 
@@ -76,10 +72,9 @@ func TestBoundingBoxMultiPolygon(t *testing.T) {
 	value := g.Get_BoundingBox()
 
 	if (expected[0] == value[0] && expected[1] == value[1] && expected[2] == value[2] && expected[3] == value[3]) == false {
-		t.Errorf("BoundingBox MultiPolygon expected: %v, got: %v",expected,value)
+		t.Errorf("BoundingBox MultiPolygon expected: %v, got: %v", expected, value)
 	}
 }
-
 
 func TestCollectionGeometry(t *testing.T) {
 	g := NewCollectionGeometry(
@@ -90,6 +85,6 @@ func TestCollectionGeometry(t *testing.T) {
 	value := g.Get_BoundingBox()
 
 	if (expected[0] == value[0] && expected[1] == value[1] && expected[2] == value[2] && expected[3] == value[3]) == false {
-		t.Errorf("BoundingBox Collection expected: %v, got: %v",expected,value)
+		t.Errorf("BoundingBox Collection expected: %v, got: %v", expected, value)
 	}
 }
