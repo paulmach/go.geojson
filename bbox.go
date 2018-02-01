@@ -55,13 +55,6 @@ func Push_Two_BoundingBoxs(bb1 []float64, bb2 []float64) []float64 {
 		east = east2
 	}
 
-	// handling east values: max
-	if east1 > east2 {
-		east = east1
-	} else {
-		east = east2
-	}
-
 	// handling north values: max
 	if north1 > north2 {
 		north = north1
