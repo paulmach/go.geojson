@@ -6,8 +6,13 @@ Supports both the [json.Marshaler](http://golang.org/pkg/encoding/json/#Marshale
 interfaces as well as [sql.Scanner](http://golang.org/pkg/database/sql/#Scanner) for directly scanning PostGIS query results.
 The package also provides helper functions such as `UnmarshalFeatureCollection`, `UnmarshalFeature` and `UnmarshalGeometry`.
 
+### Important
+This package is best for lightweight interaction with GeoJSON. If you want to actually do
+stuff with the geometry take a look at [orb/geojson](https://github.com/paulmach/orb/tree/master/geojson) which
+decodes the geometries into [orb](https://github.com/paulmach/orb) types which you can do all sorts of things with.
+
 #### To install
-	
+
 	go get github.com/paulmach/go.geojson
 
 #### To use, imports as package name `geojson`:
@@ -15,7 +20,7 @@ The package also provides helper functions such as `UnmarshalFeatureCollection`,
 	import "github.com/paulmach/go.geojson"
 
 [![Build Status](https://travis-ci.org/paulmach/go.geojson.svg?branch=master)](https://travis-ci.org/paulmach/go.geojson)
-[![Godoc Reference](https://godoc.org/github.com/paulmach/go.geojson?status.png)](https://godoc.org/github.com/paulmach/go.geojson)
+[![Godoc Reference](https://godoc.org/github.com/paulmach/go.geojson?status.svg)](https://godoc.org/github.com/paulmach/go.geojson)
 
 ## Examples
 
@@ -45,7 +50,7 @@ The package also provides helper functions such as `UnmarshalFeatureCollection`,
 
 		g.IsPoint() == true
 		g.Point == []float64{102.0, 0.5}
-	
+
 * #### Marshalling (Go -> JSON)
 
 		g := geojson.NewPointGeometry([]float64{1, 2})
@@ -65,7 +70,7 @@ The package also provides helper functions such as `UnmarshalFeatureCollection`,
 * #### Dealing with different Geometry types
 
 	A geometry can be of several types, causing problems in a statically typed language.
-	Thus there is a separate attribute on Geometry for each type. 
+	Thus there is a separate attribute on Geometry for each type.
 	See the [Geometry object](https://godoc.org/github.com/paulmach/go.geojson#Geometry) for more details.
 
 		g := geojson.UnmarshalGeometry([]byte(`
