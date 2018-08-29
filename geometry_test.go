@@ -261,6 +261,26 @@ func TestUnmarshalGeometryPolygon(t *testing.T) {
 	}
 }
 
+func TestUnmarshalGeometryPolygonBoundingBox(t *testing.T) {
+	rawJSON := `{"type": "Polygon", "coordinates": [[[1,2],[3,4]],[[5,6],[7,8]]], "bbox": [1,2,7,8]}`
+
+	g, err := UnmarshalGeometry([]byte(rawJSON))
+	if err != nil {
+		t.Fatalf("should unmarshal geometry without issue, err %v", err)
+	}
+
+	if g.Type != "Polygon" {
+		t.Errorf("incorrect type, got %v", g.Type)
+	}
+
+	if len(g.Polygon) != 2 {
+		t.Errorf("should have 2 polygon paths but got %d", len(g.Polygon))
+	}
+	if len(g.BoundingBox) != 4 {
+		t.Errorf("should have unmarshalled bounding box")
+	}
+}
+
 func TestUnmarshalGeometryMultiPolygon(t *testing.T) {
 	rawJSON := `{"type": "MultiPolygon", "coordinates": [[[[1,2],[3,4]],[[5,6],[7,8]]],[[[8,7],[6,5]],[[4,3],[2,1]]]]}`
 

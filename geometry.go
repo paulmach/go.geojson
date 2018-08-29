@@ -185,7 +185,12 @@ func decodeGeometry(g *Geometry, object map[string]interface{}) error {
 		return errors.New("type property not string")
 	}
 
-	var err error
+	bb, err := decodeBoundingBox(object["bbox"])
+	if err != nil {
+		return err
+	}
+	g.BoundingBox = bb
+
 	switch g.Type {
 	case GeometryPoint:
 		g.Point, err = decodePosition(object["coordinates"])
