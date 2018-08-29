@@ -56,6 +56,7 @@ func TestFeatureMarshalValue(t *testing.T) {
 func TestUnmarshalFeature(t *testing.T) {
 	rawJSON := `
 	  { "type": "Feature",
+	    "bbox": [1, 2, 3, 4],
 	    "geometry": {"type": "Point", "coordinates": [102.0, 0.5]},
 	    "properties": {"prop0": "value0"}
 	  }`
@@ -71,6 +72,10 @@ func TestUnmarshalFeature(t *testing.T) {
 
 	if len(f.Properties) != 1 {
 		t.Errorf("should have 1 property but got %d", len(f.Properties))
+	}
+
+	if len(f.BoundingBox) != 4 {
+		t.Errorf("should have unmarshalled bounding box")
 	}
 }
 
