@@ -176,7 +176,7 @@ func (g *Geometry) Scan(value interface{}) error {
 
 // Value implements the driver Valuer interface.
 // The columns must be sending as GeoJSON Geometry.
-// When using PostGIS a spatial column would need to be wrapped in ST_AsGeoJSON.
+// When using PostGIS a spatial column would need to be wrapped in ST_GeomFromGeoJSON.
 func (g *Geometry) Value() (driver.Value, error) {
 	return g.MarshalJSON()
 }
