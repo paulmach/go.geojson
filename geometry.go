@@ -1,6 +1,7 @@
 package geojson
 
 import (
+	"database/sql/driver"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -173,8 +174,11 @@ func (g *Geometry) Scan(value interface{}) error {
 	return g.UnmarshalJSON(data)
 }
 
+// Value implements the driver Valuer interface.
+// The columns must be sending as GeoJSON Geometry.
+// When using PostGIS a spatial column would need to be wrapped in ST_AsGeoJSON.
 func (g *Geometry) Value() (driver.Value, error) {
-    return g.MarshalJSON()
+	return g.MarshalJSON()
 }
 
 func decodeGeometry(g *Geometry, object map[string]interface{}) error {
