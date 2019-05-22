@@ -173,6 +173,10 @@ func (g *Geometry) Scan(value interface{}) error {
 	return g.UnmarshalJSON(data)
 }
 
+func (g *Geometry) Value() (driver.Value, error) {
+    return g.MarshalJSON()
+}
+
 func decodeGeometry(g *Geometry, object map[string]interface{}) error {
 	t, ok := object["type"]
 	if !ok {
