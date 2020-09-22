@@ -69,9 +69,9 @@ func (f *Feature) PropertyMustBool(key string, def ...bool) bool {
 	return defaul
 }
 
-// PropertyMustInt guarantees the return of a `bool` (with optional default)
+// PropertyMustInt guarantees the return of a `int` (with optional default)
 //
-// useful when you explicitly want a `bool` in a single value return context:
+// useful when you explicitly want a `int` in a single value return context:
 //     myFunc(f.PropertyMustInt("param1"), f.PropertyMustInt("optional_param", 123))
 func (f *Feature) PropertyMustInt(key string, def ...int) int {
 	var defaul int
@@ -88,9 +88,9 @@ func (f *Feature) PropertyMustInt(key string, def ...int) int {
 	return defaul
 }
 
-// PropertyMustFloat64 guarantees the return of a `bool` (with optional default)
+// PropertyMustFloat64 guarantees the return of a `float64` (with optional default)
 //
-// useful when you explicitly want a `bool` in a single value return context:
+// useful when you explicitly want a `float64` in a single value return context:
 //     myFunc(f.PropertyMustFloat64("param1"), f.PropertyMustFloat64("optional_param", 10.1))
 func (f *Feature) PropertyMustFloat64(key string, def ...float64) float64 {
 	var defaul float64
@@ -107,9 +107,9 @@ func (f *Feature) PropertyMustFloat64(key string, def ...float64) float64 {
 	return defaul
 }
 
-// PropertyMustString guarantees the return of a `bool` (with optional default)
+// PropertyMustString guarantees the return of a `string` (with optional default)
 //
-// useful when you explicitly want a `bool` in a single value return context:
+// useful when you explicitly want a `string` in a single value return context:
 //     myFunc(f.PropertyMustString("param1"), f.PropertyMustString("optional_param", "default"))
 func (f *Feature) PropertyMustString(key string, def ...string) string {
 	var defaul string
