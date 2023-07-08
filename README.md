@@ -1,26 +1,12 @@
-go.geojson
-==========
+# go.geojson [![CI](https://github.com/paulmach/go.geojson/workflows/CI/badge.svg)](https://github.com/paulmach/go.geojson/actions?query=workflow%3ACI+event%3Apush) [![Godoc Reference](https://godoc.org/github.com/paulmach/go.geojson?status.svg)](https://godoc.org/github.com/paulmach/go.geojson)
 
 Go.geojson is a package for **encoding and decoding** [GeoJSON](http://geojson.org/) into Go structs.
 Supports both the [json.Marshaler](http://golang.org/pkg/encoding/json/#Marshaler) and [json.Unmarshaler](http://golang.org/pkg/encoding/json/#Unmarshaler)
 interfaces as well as [sql.Scanner](http://golang.org/pkg/database/sql/#Scanner) for directly scanning PostGIS query results.
 The package also provides helper functions such as `UnmarshalFeatureCollection`, `UnmarshalFeature` and `UnmarshalGeometry`.
 
-### Important
-This package is best for lightweight interaction with GeoJSON. If you want to actually do
-stuff with the geometry take a look at [orb/geojson](https://github.com/paulmach/orb/tree/master/geojson) which
-decodes the geometries into [orb](https://github.com/paulmach/orb) types which you can do all sorts of things with.
-
-#### To install
-
-	go get github.com/paulmach/go.geojson
-
-#### To use, imports as package name `geojson`:
-
-	import "github.com/paulmach/go.geojson"
-
-[![Build Status](https://travis-ci.org/paulmach/go.geojson.svg?branch=master)](https://travis-ci.org/paulmach/go.geojson)
-[![Godoc Reference](https://godoc.org/github.com/paulmach/go.geojson?status.svg)](https://godoc.org/github.com/paulmach/go.geojson)
+### Deprecated, use [orb/geojson](https://github.com/paulmach/orb/tree/master/geojson)
+The [orb](https://github.com/paulmach/orb) package, and its subpackages, provide all the features here and more.
 
 ## Examples
 
