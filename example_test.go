@@ -49,5 +49,5 @@ func ExampleFeatureCollection_MarshalJSON() {
 	}
 
 	fmt.Printf("%s", string(rawJSON))
-	// Output: {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[1,2]},"properties":null}]}
+	// Output: {"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[1,2]},"properties":{}}]}
 }

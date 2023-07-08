@@ -75,6 +75,8 @@ func (f Feature) MarshalJSON() ([]byte, error) {
 	}
 	if f.Properties != nil && len(f.Properties) != 0 {
 		fea.Properties = f.Properties
+	} else {
+		fea.Properties = make(map[string]interface{})
 	}
 	if f.CRS != nil && len(f.CRS) != 0 {
 		fea.CRS = f.CRS

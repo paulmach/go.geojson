@@ -22,8 +22,8 @@ func TestFeatureMarshalJSON(t *testing.T) {
 		t.Fatalf("should marshal to json just fine but got %v", err)
 	}
 
-	if !bytes.Contains(blob, []byte(`"properties":null`)) {
-		t.Errorf("json should set properties to null if there are none")
+	if !bytes.Contains(blob, []byte(`"properties":{}`)) {
+		t.Errorf("json should set properties to empty object if there are none")
 	}
 }
 
@@ -35,8 +35,8 @@ func TestFeatureMarshal(t *testing.T) {
 		t.Fatalf("should marshal to json just fine but got %v", err)
 	}
 
-	if !bytes.Contains(blob, []byte(`"properties":null`)) {
-		t.Errorf("json should set properties to null if there are none")
+	if !bytes.Contains(blob, []byte(`"properties":{}`)) {
+		t.Errorf("json should set properties to empty object if there are none")
 	}
 }
 
@@ -48,8 +48,8 @@ func TestFeatureMarshalValue(t *testing.T) {
 		t.Fatalf("should marshal to json just fine but got %v", err)
 	}
 
-	if !bytes.Contains(blob, []byte(`"properties":null`)) {
-		t.Errorf("json should set properties to null if there are none")
+	if !bytes.Contains(blob, []byte(`"properties":{}`)) {
+		t.Errorf("json should set properties to empty object if there are none")
 	}
 }
 
@@ -89,7 +89,7 @@ func TestMarshalFeatureID(t *testing.T) {
 		t.Fatalf("should marshal, %v", err)
 	}
 
-	if !bytes.Equal(data, []byte(`{"id":"asdf","type":"Feature","geometry":null,"properties":null}`)) {
+	if !bytes.Equal(data, []byte(`{"id":"asdf","type":"Feature","geometry":null,"properties":{}}`)) {
 		t.Errorf("data not correct")
 		t.Logf("%v", string(data))
 	}
@@ -101,7 +101,7 @@ func TestMarshalFeatureID(t *testing.T) {
 
 	}
 
-	if !bytes.Equal(data, []byte(`{"id":123,"type":"Feature","geometry":null,"properties":null}`)) {
+	if !bytes.Equal(data, []byte(`{"id":123,"type":"Feature","geometry":null,"properties":{}}`)) {
 		t.Errorf("data not correct")
 		t.Logf("%v", string(data))
 	}
